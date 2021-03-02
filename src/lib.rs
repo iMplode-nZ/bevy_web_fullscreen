@@ -27,14 +27,9 @@ impl Plugin for FullViewportPlugin {
 
 fn get_viewport_size() -> (f32, f32) {
     let web_window = web_sys::window().expect("could not get window");
-    let document_element = web_window
-        .document()
-        .expect("could not get document")
-        .document_element()
-        .expect("could not get document element");
 
-    let width = document_element.client_width();
-    let height = document_element.client_height();
+    let width = web_window.inner_width().unwrap().as_f64().unwrap();
+    let height = web_window.inner_height().unwrap().as_f64().unwrap();
 
     (width as f32, height as f32)
 }
