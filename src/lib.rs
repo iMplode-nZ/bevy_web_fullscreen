@@ -31,7 +31,7 @@ fn get_viewport_size() -> (u32, u32) {
     let width = web_window.inner_width().unwrap().as_f64().unwrap();
     let height = web_window.inner_height().unwrap().as_f64().unwrap();
 
-    (width, height)
+    (width as u32, height as u32)
 }
 
 fn setup_viewport_resize_system(resize_sender: Res<Mutex<OnResizeSender>>) {
