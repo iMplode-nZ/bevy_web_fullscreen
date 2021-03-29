@@ -25,13 +25,13 @@ impl Plugin for FullViewportPlugin {
     }
 }
 
-fn get_viewport_size() -> (f32, f32) {
+fn get_viewport_size() -> (u32, u32) {
     let web_window = web_sys::window().expect("could not get window");
 
     let width = web_window.inner_width().unwrap().as_f64().unwrap();
     let height = web_window.inner_height().unwrap().as_f64().unwrap();
 
-    (width as f32, height as f32)
+    (width, height)
 }
 
 fn setup_viewport_resize_system(resize_sender: Res<Mutex<OnResizeSender>>) {
@@ -53,7 +53,7 @@ fn viewport_resize_system(
     if resize_receiver.lock().unwrap().try_recv().is_ok() {
         if let Some(window) = windows.get_primary_mut() {
             let size = get_viewport_size();
-            window.set_resolution(size.0 / 2 * 2, size.1 / 2 * 2);
+            window.set_resolution(size.0 / 2 * 2 as f32, size.1 / 2 * 2 as f32);
         }
     }
 }
