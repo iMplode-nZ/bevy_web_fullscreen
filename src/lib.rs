@@ -53,7 +53,7 @@ fn viewport_resize_system(
     if resize_receiver.lock().unwrap().try_recv().is_ok() {
         if let Some(window) = windows.get_primary_mut() {
             let size = get_viewport_size();
-            window.set_resolution(size.0, size.1);
+            window.set_resolution(size.0 / 2 * 2, size.1 / 2 * 2);
         }
     }
 }
